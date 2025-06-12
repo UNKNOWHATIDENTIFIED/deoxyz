@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BlackHat Browser</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: #00FF00;
+      font-family: "Courier New", Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    img {
+      width: 300px;
+      margin-bottom: 30px;
+      filter: drop-shadow(0 0 10px #0f0);
+    }
+    h1 {
+      font-size: 2em;
+      margin: 0;
+      text-shadow: 0 0 5px #0f0;
+    }
+    p {
+      font-size: 1.2em;
+      text-shadow: 0 0 5px #0f0;
+    }
+    .matrix {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="matrix"></canvas>
+  <img src="C:\\Users\\Admin\\Downloads\\logo.png" alt="BlackHat Logo">
+  <h1>Welcome to BlackHat Browser</h1>
+  <p>🦅 No Logs. No Trace. Just Hack.</p>
+
+  <script>
+    // Matrix rain effect
+    const canvas = document.querySelector('.matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const chars = "01";
+    const font_size = 14;
+    const columns = canvas.width / font_size;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = font_size + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * font_size, drops[i] * font_size);
+        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+  </script>
+</body>
+</html>
